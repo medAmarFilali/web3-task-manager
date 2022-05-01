@@ -74,9 +74,17 @@ function App() {
 
       <div className="input_section">
         <div>
-          <button onClick={() => createTicket(name)}>Create ticket</button>
-          <input type="text" onChange={(e) => setName(e.target.value)} />
-          <button onClick={getTickets}>Load Data</button>
+          <button onClick={() => createTicket(name)} className="big_button">
+            Create ticket
+          </button>
+          <input
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+            className="input"
+          />
+          <button onClick={getTickets} className="big_button">
+            Load Data
+          </button>
         </div>
       </div>
 
@@ -128,7 +136,7 @@ function App() {
                 <div className="main_ticket_button_section">
                   <button
                     className="small_button"
-                    style={{ backgroundColor: "lightBlue" }}
+                    style={{ backgroundColor: "lightPink" }}
                     onClick={() => updateTicketStatus(ticket.id, 0)}
                   >
                     Todo
@@ -163,14 +171,14 @@ function App() {
                 <div className="main_ticket_button_section">
                   <button
                     className="small_button"
-                    style={{ backgroundColor: "lightBlue" }}
+                    style={{ backgroundColor: "lightPink" }}
                     onClick={() => updateTicketStatus(ticket.id, 0)}
                   >
                     Todo
                   </button>
                   <button
                     className="small_button"
-                    style={{ backgroundColor: "lightGreen" }}
+                    style={{ backgroundColor: "lightBlue" }}
                     onClick={() => updateTicketStatus(ticket.id, 1)}
                   >
                     Busy
