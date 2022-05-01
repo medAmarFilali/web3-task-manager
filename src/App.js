@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import Manager from "./artifacts/contracts/Manager.sol/Manager.json";
+import "./App.css";
 
 function App() {
   const [name, setName] = useState("");
@@ -70,16 +71,120 @@ function App() {
           </button>
         )}
       </div>
-      <div className="input_section"></div>
+
+      <div className="input_section">
+        <div>
+          <button onClick={() => createTicket(name)}>Create ticket</button>
+          <input type="text" onChange={(e) => setName(e.target.value)} />
+          <button onClick={getTickets}>Load Data</button>
+        </div>
+      </div>
+
       <div className="main">
         <div className="main_col" style={{ backgroundColor: "lightPink" }}>
           <div className="main_col_heading">Todo</div>
+          {tickets
+            .map((t, i) => ({ id: i, item: t }))
+            .filter((t) => t.item.status === 0)
+            .map((ticket, index) => (
+              <div className="main_ticket_card" key={index}>
+                <p className="main_ticket_card_id">#{ticket.id}</p>
+                <p>{ticket.item.name}</p>
+                <div className="main_ticket_button_section">
+                  <button
+                    className="small_button"
+                    style={{ backgroundColor: "lightBlue" }}
+                    onClick={() => updateTicketStatus(ticket.id, 1)}
+                  >
+                    Busy
+                  </button>
+                  <button
+                    className="small_button"
+                    style={{ backgroundColor: "lightGreen" }}
+                    onClick={() => updateTicketStatus(ticket.id, 2)}
+                  >
+                    Done
+                  </button>
+                  <button
+                    className="small_button"
+                    style={{ backgroundColor: "lightGrey" }}
+                    onClick={() => updateTicketName(ticket.id)}
+                  >
+                    Rename
+                  </button>
+                </div>
+              </div>
+            ))}
         </div>
         <div className="main_col" style={{ backgroundColor: "lightBlue" }}>
           <div className="main_col_heading">Busy</div>
+          {tickets
+            .map((t, i) => ({ id: i, item: t }))
+            .filter((t) => t.item.status === 1)
+            .map((ticket, index) => (
+              <div className="main_ticket_card" key={index}>
+                <p className="main_ticket_card_id">#{ticket.id}</p>
+                <p>{ticket.item.name}</p>
+                <div className="main_ticket_button_section">
+                  <button
+                    className="small_button"
+                    style={{ backgroundColor: "lightBlue" }}
+                    onClick={() => updateTicketStatus(ticket.id, 0)}
+                  >
+                    Todo
+                  </button>
+                  <button
+                    className="small_button"
+                    style={{ backgroundColor: "lightGreen" }}
+                    onClick={() => updateTicketStatus(ticket.id, 2)}
+                  >
+                    Done
+                  </button>
+                  <button
+                    className="small_button"
+                    style={{ backgroundColor: "lightGrey" }}
+                    onClick={() => updateTicketName(ticket.id)}
+                  >
+                    Rename
+                  </button>
+                </div>
+              </div>
+            ))}
         </div>
         <div className="main_col" style={{ backgroundColor: "lightGreen" }}>
           <div className="main_col_heading">Done</div>
+          {tickets
+            .map((t, i) => ({ id: i, item: t }))
+            .filter((t) => t.item.status === 2)
+            .map((ticket, index) => (
+              <div className="main_ticket_card" key={index}>
+                <p className="main_ticket_card_id">#{ticket.id}</p>
+                <p>{ticket.item.name}</p>
+                <div className="main_ticket_button_section">
+                  <button
+                    className="small_button"
+                    style={{ backgroundColor: "lightBlue" }}
+                    onClick={() => updateTicketStatus(ticket.id, 0)}
+                  >
+                    Todo
+                  </button>
+                  <button
+                    className="small_button"
+                    style={{ backgroundColor: "lightGreen" }}
+                    onClick={() => updateTicketStatus(ticket.id, 1)}
+                  >
+                    Busy
+                  </button>
+                  <button
+                    className="small_button"
+                    style={{ backgroundColor: "lightGrey" }}
+                    onClick={() => updateTicketName(ticket.id)}
+                  >
+                    Rename
+                  </button>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>
